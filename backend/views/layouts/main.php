@@ -127,7 +127,9 @@ AppAsset::register($this);
                 <i class="fa fa-user"></i> <span>Admin</span> <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
-                <li class="active"><a href="index.html"><i class="fa fa-circle-o"></i> Tambah Admin</a></li>
+                  <li class="active">
+					<?= Html::a('<i class="fa fa-circle-o"></i> Tambah Admin', ['/useradmin']) ?>
+				  </li>
               </ul>
             </li>
             <li class="treeview">
@@ -135,14 +137,14 @@ AppAsset::register($this);
                 <i class="fa fa-file"></i> <span>Mastering</span> <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
-                <li><a href="index.html"><i class="fa fa-circle-o"></i> Kategori Produk</a></li>
-                <li><a href="index.html"><i class="fa fa-circle-o"></i> Sub Kategori Produk</a></li>
-                <li><a href="index.html"><i class="fa fa-circle-o"></i> Sub Sub Kategori Produk</a></li>
-                <li><a href="index.html"><i class="fa fa-circle-o"></i> Brand</a></li>
-                <li><a href="index.html"><i class="fa fa-circle-o"></i> Jasa Pengiriman</a></li>
-                <li><a href="index.html"><i class="fa fa-circle-o"></i> Level Member</a></li>
-                <li><a href="index.html"><i class="fa fa-circle-o"></i> Warna</a></li>
-                <li><a href="index.html"><i class="fa fa-circle-o"></i> SKU & ID Produk</a></li>
+                <li><?= Html::a('<i class="fa fa-circle-o"></i> Kategori Produk', ['/kategori']) ?></li>
+                <li><?= Html::a('<i class="fa fa-circle-o"></i> Sub Kategori Produk', ['/subkategori']) ?></li>
+                <li><?= Html::a('<i class="fa fa-circle-o"></i> Sub Sub Kategori Produk', ['/users']) ?></li>
+                <li><?= Html::a('<i class="fa fa-circle-o"></i> Brand', ['/brand']) ?></li>
+                <li><?= Html::a('<i class="fa fa-circle-o"></i> Jasa Pengiriman', ['/users']) ?></li>
+                <li><?= Html::a('<i class="fa fa-circle-o"></i> Level Member', ['/leveluser']) ?></li>
+                <li><?= Html::a('<i class="fa fa-circle-o"></i> Warna', ['/warna']) ?></li>
+                <li><?= Html::a('<i class="fa fa-circle-o"></i> SKU & ID Produk', ['/users']) ?></li>
               </ul>
             </li>
 			<li class="treeview">
@@ -150,12 +152,12 @@ AppAsset::register($this);
                 <i class="fa fa-dollar"></i> <span>Produk & Penjualan</span> <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
-                <li><a href="index.html"><i class="fa fa-circle-o"></i> Tambah Produk</a></li>
-                <li><a href="index.html"><i class="fa fa-circle-o"></i> Produk Unggulan</a></li>
-                <li><a href="index.html"><i class="fa fa-circle-o"></i> Produk Promo</a></li>
-                <li><a href="index.html"><i class="fa fa-circle-o"></i> Produk Promo Plus</a></li>
-                <li><a href="index.html"><i class="fa fa-circle-o"></i> Voucher & Delivery</a></li>
-                <li><a href="index.html"><i class="fa fa-circle-o"></i> Ekspor & Impor</a></li>
+                <li><?= Html::a('<i class="fa fa-circle-o"></i> Tambah Produk', ['/msproduk']) ?></li>
+                <li><?= Html::a('<i class="fa fa-circle-o"></i> Produk Unggulan', ['/users']) ?></li>
+                <li><?= Html::a('<i class="fa fa-circle-o"></i> Produk Promo', ['/users']) ?></li>
+                <li><?= Html::a('<i class="fa fa-circle-o"></i> Produk Promo Plus', ['/users']) ?></li>
+                <li><?= Html::a('<i class="fa fa-circle-o"></i> Voucher & Delivery', ['/voucher']) ?></li>
+                <li><?= Html::a('<i class="fa fa-circle-o"></i> Ekspor & Impor', ['/users']) ?></li>
               </ul>
             </li>
 			<li class="treeview">
@@ -163,8 +165,8 @@ AppAsset::register($this);
                 <i class="fa fa-users"></i> <span>Customer</span> <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
-                <li><a href="index.html"><i class="fa fa-circle-o"></i> Daftar Customer</a></li>
-                <li><a href="index.html"><i class="fa fa-circle-o"></i> Kirim Pesan</a></li>
+                <li><?= Html::a('<i class="fa fa-circle-o"></i> Daftar Customer', ['/users']) ?></li>
+                <li><?= Html::a('<i class="fa fa-circle-o"></i> Kirim Pesan', ['/users']) ?></li>
               </ul>
             </li>
 			<li class="treeview">
@@ -173,29 +175,27 @@ AppAsset::register($this);
               </a>
               <ul class="treeview-menu">
 				<li>
-                  <a href="#"><i class="fa fa-circle-o"></i> Master <i class="fa fa-angle-left pull-right"></i></a>
+				  <?= Html::a('<i class="fa fa-circle-o"></i> Master <i class="fa fa-angle-left pull-right"></i>', ['/users']) ?>
                   <ul class="treeview-menu">
-                    <li><a href="#"><i class="fa fa-circle-o"></i> Kabupaten / Kota</a></li>
-                    <li><a href="#"><i class="fa fa-circle-o"></i> Kecamatan</a></li>
-                    <li><a href="#"><i class="fa fa-circle-o"></i> Kode Pos</a></li>
+					<li><?= Html::a('<i class="fa fa-circle-o"></i> Kabupaten / Kota', ['/users']) ?></li>
+					<li><?= Html::a('<i class="fa fa-circle-o"></i> Kecamatan', ['/users']) ?></li>
+					<li><?= Html::a('<i class="fa fa-circle-o"></i> Kode Pos', ['/users']) ?></li>
                   </ul>
                 </li>
-                <li><a href="index.html"><i class="fa fa-circle-o"></i> Input Biaya</a></li>
-                <li><a href="index.html"><i class="fa fa-circle-o"></i> Ekspor & Impor</a></li>
+				<li><?= Html::a('<i class="fa fa-circle-o"></i> Input Biaya', ['/users']) ?></li>
+				<li><?= Html::a('<i class="fa fa-circle-o"></i> Ekspor & Impor', ['/users']) ?></li>
               </ul>
             </li>
 			<li>
-              <a href="#">
-                <i class="fa fa-shopping-cart"></i> <span>Order & Transaksi</span>
-              </a>
+			  <?= Html::a('<i class="fa fa-shopping-cart"></i> <span>Order & Transaksi</span>', ['/users']) ?>
             </li>
 			<li class="treeview">
               <a href="#">
                 <i class="fa fa-info-circle"></i> <span>Web Info</span> <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
-                <li><a href="index.html"><i class="fa fa-circle-o"></i> Slide Show</a></li>
-                <li><a href="index.html"><i class="fa fa-circle-o"></i> Web Info</a></li>
+				<li><?= Html::a('<i class="fa fa-circle-o"></i> Slide Show', ['/slideshow']) ?></li>
+				<li><?= Html::a('<i class="fa fa-circle-o"></i> Web Info', ['/users']) ?></li>
               </ul>
             </li>
 			<li class="treeview">
@@ -203,15 +203,15 @@ AppAsset::register($this);
                 <i class="fa fa-line-chart"></i> <span>Report</span> <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
-                <li><a href="index.html"><i class="fa fa-circle-o"></i> Berdasarkan Waktu Transaksi</a></li>
-                <li><a href="index.html"><i class="fa fa-circle-o"></i> Berdasarkan Waktu Proses</a></li>
-                <li><a href="index.html"><i class="fa fa-circle-o"></i> Berdasarkan Waktu Kirim</a></li>
-                <li><a href="index.html"><i class="fa fa-circle-o"></i> Berdasarkan Barang Yang Banyak Dilihat</a></li>
-                <li><a href="index.html"><i class="fa fa-circle-o"></i> Banyaknya Barang Terkirim Berdasarkan Tujuan Pengiriman</a></li>
-                <li><a href="index.html"><i class="fa fa-circle-o"></i> Banyaknya Barang Terlaku Berdasarkan Kategori dan Sub Kategori Barang</a></li>
-                <li><a href="index.html"><i class="fa fa-circle-o"></i> Banyaknya barang Terlaku Berdasarkan Brands</a></li>
-                <li><a href="index.html"><i class="fa fa-circle-o"></i> Melihat Daftar Barang Yang Diperdagangkan</a></li>
-                <li><a href="index.html"><i class="fa fa-circle-o"></i> Nilai Transaksi</a></li>
+                <li><?= Html::a('<i class="fa fa-circle-o"></i> By Waktu Transaksi', ['/users']) ?></li>
+                <li><?= Html::a('<i class="fa fa-circle-o"></i> By Waktu Proses', ['/users']) ?></li>
+                <li><?= Html::a('<i class="fa fa-circle-o"></i> By Waktu Kirim', ['/users']) ?></li>
+                <li><?= Html::a('<i class="fa fa-circle-o"></i> Barang Yang Banyak Dilihat', ['/users']) ?></li>
+                <li><?= Html::a('<i class="fa fa-circle-o"></i> Barang Terkirim By Tujuan', ['/users']) ?></li>
+                <li><?= Html::a('<i class="fa fa-circle-o"></i> Barang Terlaku By Kategori', ['/users']) ?></li>
+                <li><?= Html::a('<i class="fa fa-circle-o"></i> Barang Terlaku By Brands', ['/users']) ?></li>
+                <li><?= Html::a('<i class="fa fa-circle-o"></i> Daftar Barang Yang Dijual', ['/users']) ?></li>
+                <li><?= Html::a('<i class="fa fa-circle-o"></i> Nilai Transaksi', ['/users']) ?></li>
               </ul>
             </li>
           </ul>
