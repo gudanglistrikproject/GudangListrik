@@ -3,16 +3,16 @@
 namespace backend\controllers;
 
 use Yii;
-use backend\models\Brand;
+use backend\models\LevelUser;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * BrandController implements the CRUD actions for Brand model.
+ * LeveluserController implements the CRUD actions for LevelUser model.
  */
-class BrandController extends Controller
+class LeveluserController extends Controller
 {
     /**
      * @inheritdoc
@@ -30,18 +30,18 @@ class BrandController extends Controller
     }
 
     /**
-     * Lists all Brand models.
+     * Lists all LevelUser models.
      * @return mixed
      */
     public function actionIndex()
     {
         $dataProvider = new ActiveDataProvider([
-            'query' => Brand::find(),
+            'query' => LevelUser::find(),
         ]);
 		if($dataProvider != null)
 		{
 			$dataProvider = new ActiveDataProvider([
-                        'query' => Brand::find()->where(['vRowStatus'=>'N']),
+            'query' => LevelUser::find()->where(['nRow_status'=>'N']),
 			]);
 		}
         return $this->render('index', [
@@ -50,70 +50,39 @@ class BrandController extends Controller
     }
 
     /**
-     * Displays a single Brand model.
+     * Displays a single LevelUser model.
      * @param integer $id
      * @return mixed
      */
     public function actionView($id)
     {
-		$model = $this->findModel($id);
-		if(Yii::$app->request->isAjax)
-		{
-			return $this->renderAjax('view', [
-				'model' => $model
-			]);
-		}
-
         return $this->render('view', [
             'model' => $this->findModel($id),
         ]);
     }
 
     /**
-     * Creates a new Brand model.
+     * Creates a new LevelUser model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Brand();
+        $model = new LevelUser();
 
-        if ($model->load(Yii::$app->request->post())) {
-            $model->vRowStatus='N';
+        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+            $model->nRow_status='N';
             $model->save();
-            return $this->redirect(['index']);
+            return $this->redirect(['view', 'id' => $model->nID_level]);
         } else {
-            if(Yii::$app->request->isAjax)
-            {
-                    return $this->renderAjax('create', [
-                            'model' => $model
-                    ]);
-            }
             return $this->render('create', [
                 'model' => $model,
             ]);
         }
     }
-    
-    public function actionBrandcheckjson() {
-        $status = 'Fail';
-        if (Yii::$app->request->post()) {
-            $data = Yii::$app->request->post();
-            $vNama_brand = $data['vNama_brand'];
-            $nIDkategoriValue = $data['nIDkategoriValue'];
-            
-            $dataProvider = new ActiveDataProvider([
-                'query' => Brand::find()->where(['vRowStatus'=>'N']),
-            ]);
-            
-            $status = 's'; //$model->login();
-        }
-        
-        $this->renderPartial('_ajaxContent', array('message'=>$status), false, true);
-    }
 
     /**
-     * Updates an existing Brand model.
+     * Updates an existing LevelUser model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -123,14 +92,8 @@ class BrandController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['index']);
+            return $this->redirect(['view', 'id' => $model->nID_level]);
         } else {
-                if(Yii::$app->request->isAjax)
-                {
-                        return $this->renderAjax('update', [
-                                'model' => $model
-                        ]);
-                }
             return $this->render('update', [
                 'model' => $model,
             ]);
@@ -138,7 +101,7 @@ class BrandController extends Controller
     }
 
     /**
-     * Deletes an existing Brand model.
+     * Deletes an existing LevelUser model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -146,22 +109,22 @@ class BrandController extends Controller
     public function actionDelete($id)
     {
         $model = $this->findModel($id);
-        $model->vRowStatus='Y';
+        $model->nRow_status='Y';
         $model->save();
-        
+
         return $this->redirect(['index']);
     }
 
     /**
-     * Finds the Brand model based on its primary key value.
+     * Finds the LevelUser model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Brand the loaded model
+     * @return LevelUser the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Brand::findOne($id)) !== null) {
+        if (($model = LevelUser::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

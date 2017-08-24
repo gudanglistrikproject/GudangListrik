@@ -7,7 +7,7 @@ use yii\web\BadRequestHttpException;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
-use common\models\LoginForm;
+use frontend\models\LoginForm;
 use frontend\models\PasswordResetRequestForm;
 use frontend\models\ResetPasswordForm;
 use frontend\models\SignupForm;
@@ -40,12 +40,12 @@ class SiteController extends Controller
                     ],
                 ],
             ],
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'logout' => ['post'],
-                ],
-            ],
+//            'verbs' => [
+//                'class' => VerbFilter::className(),
+//                'actions' => [
+//                    'logout' => ['post'],
+//                ],
+//            ],
         ];
     }
 
@@ -82,18 +82,32 @@ class SiteController extends Controller
      */
     public function actionLogin()
     {
-        if (!Yii::$app->user->isGuest) {
-            return $this->goHome();
-        }
-
         $model = new LoginForm();
-        if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            return $this->goBack();
-        } else {
-            return $this->render('login', [
+        if (!Yii::$app->user->isGuest) {
+            return $this->redirect('/gudanglistrik/admin');
+        }
+        else{
+            return $this->renderPartial('login', [
                 'model' => $model,
             ]);
         }
+    }
+    
+    public function actionLoginjson()
+    {
+        $status = 'Fail';
+        if (Yii::$app->request->post()) {
+            $data = Yii::$app->request->post();
+            $username = $data['username'];
+            $password = $data['password'];
+            
+            $model = new LoginForm();
+            $model->username = $username;
+            $model->password = $password;
+            $status = $model->login();
+            $status = 'Done';
+        }
+        return $status;
     }
 
     /**
@@ -104,8 +118,8 @@ class SiteController extends Controller
     public function actionLogout()
     {
         Yii::$app->user->logout();
-
-        return $this->goHome();
+        return $this->redirect('/gudanglistrik');
+        //return $this->goHome();
     }
 
     /**
@@ -157,7 +171,7 @@ class SiteController extends Controller
             }
         }
 
-        return $this->render('signup', [
+        return $this->renderPartial('signup', [
             'model' => $model,
         ]);
     }

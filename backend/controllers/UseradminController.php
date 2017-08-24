@@ -3,16 +3,16 @@
 namespace backend\controllers;
 
 use Yii;
-use backend\models\Brand;
+use backend\models\UserAdmin;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * BrandController implements the CRUD actions for Brand model.
+ * UseradminController implements the CRUD actions for UserAdmin model.
  */
-class BrandController extends Controller
+class UseradminController extends Controller
 {
     /**
      * @inheritdoc
@@ -30,90 +30,52 @@ class BrandController extends Controller
     }
 
     /**
-     * Lists all Brand models.
+     * Lists all UserAdmin models.
      * @return mixed
      */
     public function actionIndex()
     {
         $dataProvider = new ActiveDataProvider([
-            'query' => Brand::find(),
+            'query' => UserAdmin::find(),
         ]);
-		if($dataProvider != null)
-		{
-			$dataProvider = new ActiveDataProvider([
-                        'query' => Brand::find()->where(['vRowStatus'=>'N']),
-			]);
-		}
+
         return $this->render('index', [
             'dataProvider' => $dataProvider,
         ]);
     }
 
     /**
-     * Displays a single Brand model.
+     * Displays a single UserAdmin model.
      * @param integer $id
      * @return mixed
      */
     public function actionView($id)
     {
-		$model = $this->findModel($id);
-		if(Yii::$app->request->isAjax)
-		{
-			return $this->renderAjax('view', [
-				'model' => $model
-			]);
-		}
-
         return $this->render('view', [
             'model' => $this->findModel($id),
         ]);
     }
 
     /**
-     * Creates a new Brand model.
+     * Creates a new UserAdmin model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Brand();
+        $model = new UserAdmin();
 
-        if ($model->load(Yii::$app->request->post())) {
-            $model->vRowStatus='N';
-            $model->save();
-            return $this->redirect(['index']);
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['view', 'id' => $model->nID_admin]);
         } else {
-            if(Yii::$app->request->isAjax)
-            {
-                    return $this->renderAjax('create', [
-                            'model' => $model
-                    ]);
-            }
             return $this->render('create', [
                 'model' => $model,
             ]);
         }
     }
-    
-    public function actionBrandcheckjson() {
-        $status = 'Fail';
-        if (Yii::$app->request->post()) {
-            $data = Yii::$app->request->post();
-            $vNama_brand = $data['vNama_brand'];
-            $nIDkategoriValue = $data['nIDkategoriValue'];
-            
-            $dataProvider = new ActiveDataProvider([
-                'query' => Brand::find()->where(['vRowStatus'=>'N']),
-            ]);
-            
-            $status = 's'; //$model->login();
-        }
-        
-        $this->renderPartial('_ajaxContent', array('message'=>$status), false, true);
-    }
 
     /**
-     * Updates an existing Brand model.
+     * Updates an existing UserAdmin model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -123,14 +85,8 @@ class BrandController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['index']);
+            return $this->redirect(['view', 'id' => $model->nID_admin]);
         } else {
-                if(Yii::$app->request->isAjax)
-                {
-                        return $this->renderAjax('update', [
-                                'model' => $model
-                        ]);
-                }
             return $this->render('update', [
                 'model' => $model,
             ]);
@@ -138,30 +94,28 @@ class BrandController extends Controller
     }
 
     /**
-     * Deletes an existing Brand model.
+     * Deletes an existing UserAdmin model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
      */
     public function actionDelete($id)
     {
-        $model = $this->findModel($id);
-        $model->vRowStatus='Y';
-        $model->save();
-        
+        $this->findModel($id)->delete();
+
         return $this->redirect(['index']);
     }
 
     /**
-     * Finds the Brand model based on its primary key value.
+     * Finds the UserAdmin model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Brand the loaded model
+     * @return UserAdmin the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Brand::findOne($id)) !== null) {
+        if (($model = UserAdmin::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

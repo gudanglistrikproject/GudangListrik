@@ -15,12 +15,14 @@ class AppAsset extends AssetBundle
 		'css/bootstrap.min.css',
 		'css/AdminLTE.min.css',
 		'css/skin-yellow-light.min.css',
-        'css/site.css',
+                'css/site.css',
+                'css/toast/toastr.min.css',
     ];
     public $js = [
 		'js/jQuery-2.1.4.min.js',
 		'js/bootstrap.min.js',
 		'js/app.min.js',
+                'js/toast/toastr.min.js',
 		
     ];
     public $depends = [

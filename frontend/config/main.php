@@ -17,7 +17,8 @@ return [
 			'baseUrl' => '/gudanglistrik',
         ],
         'user' => [
-            'identityClass' => 'common\models\User',
+            //'identityClass' => 'common\models\User',
+            'identityClass' => 'frontend\models\UserAdmin',
             'enableAutoLogin' => true,
             'identityCookie' => ['name' => '_identity-frontend', 'httpOnly' => true],
         ],

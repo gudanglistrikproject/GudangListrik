@@ -10,12 +10,19 @@ $this->title = 'Create Brand';
 $this->params['breadcrumbs'][] = ['label' => 'Brands', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="brand-create">
+<div class="modal-header">
+	<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	<span aria-hidden="true">×</span></button>
+	<h4 class="modal-title"><?= Html::encode($this->title) ?></h4>
+</div>
 
-    <h1><?= Html::encode($this->title) ?></h1>
+<div class="modal-body">
 
     <?= $this->render('_form', [
         'model' => $model,
     ]) ?>
+</div>
 
+<div class="modal-footer">
+	<button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
 </div>

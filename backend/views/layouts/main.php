@@ -77,7 +77,7 @@ AppAsset::register($this);
                       <a href="#" class="btn btn-default btn-flat">Change Password</a>
                     </div>
                     <div class="pull-right">
-                      <a href="#" class="btn btn-default btn-flat">Sign Out</a>
+                      <a href="/gudanglistrik/site/logout" class="btn btn-default btn-flat">Sign Out</a>
                     </div>
                   </li>
                 </ul>
@@ -221,6 +221,11 @@ AppAsset::register($this);
 	  
     <div class="content-wrapper">
         <section class="content-header">
+			<h1>
+				<?= Html::encode($this->title) ?>
+				<!--<small>Preview page</small>-->
+			</h1>
+	  
 			<?= Breadcrumbs::widget([
 				'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
 			]) ?>
@@ -239,7 +244,26 @@ AppAsset::register($this);
 	<p class="pull-right hidden-xs"><?= Yii::powered() ?></p>
 </footer>
 
+<!-- Modal -->
+<div id="modalPopup" class="modal fade infront-slider-dot" role="dialog">
+	<div class="modal-dialog">
+
+		<!-- Modal content-->
+		<div class="modal-content">
+		</div>
+
+	</div>
+</div>
+
 <?php $this->endBody() ?>
 </body>
+
+<script type="text/javascript">
+	$(document).on('click', '.modalBtn', function(){
+		console.log('Hit');
+		$('.modal-content').load($(this).attr('href'));
+    });
+</script>
+
 </html>
 <?php $this->endPage() ?>

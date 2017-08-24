@@ -9,9 +9,11 @@ use common\models\User;
  */
 class SignupForm extends Model
 {
+    public $name;
     public $username;
     public $email;
     public $password;
+    public $phone;
 
 
     /**

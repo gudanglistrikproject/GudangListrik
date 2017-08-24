@@ -30,7 +30,7 @@ class Brand extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['nID_kategori'], 'required'],
+            [['nID_kategori','vBrand_seo', 'vNama_brand','vInisial_brand'], 'required'],
             [['nID_kategori'], 'integer'],
             [['vRowStatus'], 'string'],
             [['vBrand_seo', 'vNama_brand'], 'string', 'max' => 200],

@@ -2,6 +2,8 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
+use yii\bootstrap\Modal;
+use yii\helpers\Url;
 
 /* @var $this yii\web\View */
 /* @var $dataProvider yii\data\ActiveDataProvider */
@@ -10,29 +12,58 @@ $this->title = 'Brands';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="brand-index">
-
-    <h1><?= Html::encode($this->title) ?></h1>
-
-    <p>
-        <?= Html::a('Create Brand', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
-    <?= GridView::widget([
-        'dataProvider' => $dataProvider,
-        'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
-            [
-                'attribute'=> 'nID_kategori',
-                'label'=>'Kategori',
-                
-            ],
-            //'nID_brand',
-            //'nID_kategori',
-            'vBrand_seo',
-            'vInisial_brand',
-            'vNama_brand',
-            // 'vRowStatus',
-
-            ['class' => 'yii\grid\ActionColumn'],
-        ],
-    ]); ?>
+	<div class="box">
+		<div class="box-header with-border">
+			<h3 class="box-title">Data Brands</h3>
+			<p class="pull-right">
+				<?= Html::a('<i class="glyphicon glyphicon-plus"></i>New Brand', ['create'], ['class' => "btn btn-success modalBtn",
+                                                    'data-toggle'=>"modal",
+                                                    'data-target'=>"#modalPopup"
+                                                    ]) ?>
+			</p>
+		</div>
+		<!-- /.box-header -->
+		<div class="box-body">
+			<?= GridView::widget([
+				'dataProvider' => $dataProvider,
+				'columns' => [
+					['class' => 'yii\grid\SerialColumn'],
+					[
+						'attribute'=> 'nID_kategori',
+						'label'=>'Kategori',
+					],
+                                        [
+						'attribute'=> 'vBrand_seo',
+						'label'=>'Brand Seo',
+					],
+                                        [
+						'attribute'=> 'vInisial_brand',
+						'label'=>'Inisial Brand',
+					],
+                                        [
+						'attribute'=> 'vNama_brand',
+						'label'=>'Nama Brand',
+					],		
+					['class' => 'yii\grid\ActionColumn',
+						'buttons'=>[
+							'view'=>function ($url, $model) {
+								return  Html::a('<span class="glyphicon glyphicon-eye-open"></span>' ,['view','id'=>$model->nID_brand],[
+                                                                                'class' => "modalBtn",
+                                                                                'data-toggle'=>"modal",
+                                                                                'data-target'=>"#modalPopup"
+                                                                                ]);
+                                                                },
+							'update'=>function ($url, $model) {
+								return  Html::a('<span class="glyphicon glyphicon-pencil"></span>' ,['update','id'=>$model->nID_brand],[
+                                                                                'class' => "modalBtn",
+                                                                                'data-toggle'=>"modal",
+                                                                                'data-target'=>"#modalPopup"
+                                                                                ]);
+                                                                },
+                                                        ],
+					],
+				],
+			]); ?>
+		</div>
+	</div>
 </div>
