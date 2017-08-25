@@ -40,9 +40,9 @@ class SlideshowController extends Controller
         ]);
 		if($dataProvider != null)
 		{
-			$dataProvider = new ActiveDataProvider([
-            'query' => SlideShow::find()->where(['nRowStatus'=>'N']),
-			]);
+                    $dataProvider = new ActiveDataProvider([
+                    'query' => SlideShow::find()->where(['nRowStatus'=>'N']),
+                    ]);
 		}
         return $this->render('index', [
             'dataProvider' => $dataProvider,
@@ -56,6 +56,13 @@ class SlideshowController extends Controller
      */
     public function actionView($id)
     {
+        $model = $this->findModel($id);
+        if(Yii::$app->request->isAjax)
+        {
+                return $this->renderAjax('view', [
+                        'model' => $model
+                ]);
+        }
         return $this->render('view', [
             'model' => $this->findModel($id),
         ]);
@@ -71,10 +78,16 @@ class SlideshowController extends Controller
         $model = new SlideShow();
 
         if ($model->load(Yii::$app->request->post())) {
-			$model->nRowStatus='N';
+            $model->nRowStatus='N';
             $model->save();
-            return $this->redirect(['view', 'id' => $model->nID]);
+            return $this->redirect(['index']);
         } else {
+            if(Yii::$app->request->isAjax)
+            {
+                    return $this->renderAjax('create', [
+                            'model' => $model
+                    ]);
+            }
             return $this->render('create', [
                 'model' => $model,
             ]);
@@ -92,8 +105,14 @@ class SlideshowController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->nID]);
+            return $this->redirect(['index']);
         } else {
+            if(Yii::$app->request->isAjax)
+            {
+                return $this->renderAjax('update', [
+                        'model' => $model
+                ]);
+            }
             return $this->render('update', [
                 'model' => $model,
             ]);

@@ -41,7 +41,7 @@ class SubkategoriController extends Controller
 		if($dataProvider != null)
 		{
 			$dataProvider = new ActiveDataProvider([
-            'query' => SubKategori::find()->where(['nRowStatus'=>'N']),
+                        'query' => SubKategori::find()->where(['nRowStatus'=>'N']),
 			]);
 		}
         return $this->render('index', [
@@ -56,6 +56,13 @@ class SubkategoriController extends Controller
      */
     public function actionView($id)
     {
+        $model = $this->findModel($id);
+        if(Yii::$app->request->isAjax)
+        {
+                return $this->renderAjax('view', [
+                        'model' => $model
+                ]);
+        }
         return $this->render('view', [
             'model' => $this->findModel($id),
         ]);
@@ -71,10 +78,16 @@ class SubkategoriController extends Controller
         $model = new SubKategori();
 
         if ($model->load(Yii::$app->request->post())) {
-			$model->nRowStatus='N';
+            $model->nRowStatus='N';
             $model->save();
-            return $this->redirect(['view', 'id' => $model->nID_subkategori]);
+            return $this->redirect(['index']);
         } else {
+            if(Yii::$app->request->isAjax)
+            {
+                return $this->renderAjax('create', [
+                        'model' => $model
+                ]);
+            }
             return $this->render('create', [
                 'model' => $model,
             ]);
@@ -92,8 +105,14 @@ class SubkategoriController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->nID_subkategori]);
+            return $this->redirect(['index']);
         } else {
+            if(Yii::$app->request->isAjax)
+            {
+                return $this->renderAjax('create', [
+                        'model' => $model
+                ]);
+            }
             return $this->render('update', [
                 'model' => $model,
             ]);

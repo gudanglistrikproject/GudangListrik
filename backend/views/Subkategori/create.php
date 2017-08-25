@@ -10,12 +10,15 @@ $this->title = 'Create Sub Kategori';
 $this->params['breadcrumbs'][] = ['label' => 'Sub Kategoris', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="sub-kategori-create">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+<div class="modal-header">
+	<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	<span aria-hidden="true">×</span></button>
+	<h4 class="modal-title"><?= Html::encode($this->title) ?></h4>
+</div>
+<div class="modal-body">
 
     <?= $this->render('_form', [
         'model' => $model,
     ]) ?>
-
 </div>

@@ -10,9 +10,9 @@ use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * UserLogController implements the CRUD actions for UserLog model.
+ * UserlogController implements the CRUD actions for UserLog model.
  */
-class UserLogController extends Controller
+class UserlogController extends Controller
 {
     /**
      * @inheritdoc
@@ -38,7 +38,7 @@ class UserLogController extends Controller
         $dataProvider = new ActiveDataProvider([
             'query' => UserLog::find(),
         ]);
-		
+
         return $this->render('index', [
             'dataProvider' => $dataProvider,
         ]);
@@ -65,9 +65,7 @@ class UserLogController extends Controller
     {
         $model = new UserLog();
 
-        if ($model->load(Yii::$app->request->post())) {
-			
-            $model->save();
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->nID_userlog]);
         } else {
             return $this->render('create', [
@@ -103,9 +101,7 @@ class UserLogController extends Controller
      */
     public function actionDelete($id)
     {
-        $model = $this->findModel($id);
-        
-        $model->save();
+        $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
     }

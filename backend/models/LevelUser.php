@@ -10,6 +10,7 @@ use Yii;
  * @property integer $nID_level
  * @property string $vLevel_user
  * @property string $vDeskripsi
+ * @property string $vOtoritastype
  * @property string $nRow_status
  */
 class LevelUser extends \yii\db\ActiveRecord
@@ -29,7 +30,7 @@ class LevelUser extends \yii\db\ActiveRecord
     {
         return [
             [['vLevel_user'], 'required'],
-            [['nRow_status'], 'string'],
+            [['vOtoritastype', 'nRow_status'], 'string'],
             [['vLevel_user', 'vDeskripsi'], 'string', 'max' => 100],
         ];
     }
@@ -40,10 +41,11 @@ class LevelUser extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'nID_level' => 'N Id Level',
-            'vLevel_user' => 'V Level User',
-            'vDeskripsi' => 'V Deskripsi',
-            'nRow_status' => 'N Row Status',
+            'nID_level' => 'Id Level',
+            'vLevel_user' => 'Level User',
+            'vDeskripsi' => 'Deskripsi',
+            'vOtoritastype' => 'Otoritastype',
+            'nRow_status' => 'Row Status',
         ];
     }
 }

@@ -21,10 +21,11 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'parent_id')->textInput() ?>
 
 
-    <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+    <div class="modal-footer">
+        <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-success']) ?>
+        <button type="button" class="btn btn-success" data-dismiss="modal">Close</button>
     </div>
-
+    
     <?php ActiveForm::end(); ?>
 
 </div>

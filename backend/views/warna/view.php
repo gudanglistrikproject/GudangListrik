@@ -10,30 +10,24 @@ $this->title = $model->nID_warna;
 $this->params['breadcrumbs'][] = ['label' => 'Warnas', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="warna-view">
+<div class="modal-header">
+	<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	<span aria-hidden="true">×</span></button>
+	<h4 class="modal-title"><?= Html::encode($this->title) ?></h4>
+</div>
 
-    <h1><?= Html::encode($this->title) ?></h1>
-
-    <p>
-        <?= Html::a('Update', ['update', 'id' => $model->nID_warna], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Delete', ['delete', 'id' => $model->nID_warna], [
-            'class' => 'btn btn-danger',
-            'data' => [
-                'confirm' => 'Are you sure you want to delete this item?',
-                'method' => 'post',
-            ],
-        ]) ?>
-    </p>
+<div class="modal-body">
 
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'nID_warna',
             'vKode_warna',
             'vNama_warna',
             'vDeskripsi:ntext',
-            'nRow_status',
         ],
     ]) ?>
 
+</div>
+<div class="modal-footer">
+	<button type="button" class="btn btn-success" data-dismiss="modal">Close</button>
 </div>

@@ -38,12 +38,12 @@ class VoucherController extends Controller
         $dataProvider = new ActiveDataProvider([
             'query' => Voucher::find(),
         ]);
-		if($dataProvider != null)
-		{
-			$dataProvider = new ActiveDataProvider([
-            'query' => Voucher::find()->where(['nRowStatus'=>'N']),
-			]);
-		}
+            if($dataProvider != null)
+            {
+                $dataProvider = new ActiveDataProvider([
+                'query' => Voucher::find()->where(['nRowStatus'=>'N']),
+                ]);
+            }
         return $this->render('index', [
             'dataProvider' => $dataProvider,
         ]);
@@ -56,6 +56,13 @@ class VoucherController extends Controller
      */
     public function actionView($id)
     {
+        $model = $this->findModel($id);
+        if(Yii::$app->request->isAjax)
+        {
+                return $this->renderAjax('view', [
+                        'model' => $model
+                ]);
+        }
         return $this->render('view', [
             'model' => $this->findModel($id),
         ]);
@@ -73,8 +80,14 @@ class VoucherController extends Controller
         if ($model->load(Yii::$app->request->post())) {
 			$model->nRowStatus='N';
             $model->save();
-            return $this->redirect(['view', 'id' => $model->nID]);
+            return $this->redirect(['index']);
         } else {
+            if(Yii::$app->request->isAjax)
+            {
+                return $this->renderAjax('create', [
+                        'model' => $model
+                ]);
+            }
             return $this->render('create', [
                 'model' => $model,
             ]);
@@ -92,8 +105,14 @@ class VoucherController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->nID]);
+            return $this->redirect(['index']);
         } else {
+            if(Yii::$app->request->isAjax)
+            {
+                return $this->renderAjax('update', [
+                        'model' => $model
+                ]);
+            }
             return $this->render('update', [
                 'model' => $model,
             ]);

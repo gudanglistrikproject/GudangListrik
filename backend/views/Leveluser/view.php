@@ -10,28 +10,26 @@ $this->title = $model->nID_level;
 $this->params['breadcrumbs'][] = ['label' => 'Level Users', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="level-user-view">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+<div class="modal-header">
+	<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	<span aria-hidden="true">×</span></button>
+	<h4 class="modal-title"><?= Html::encode($this->title) ?></h4>
+</div>
 
-    <p>
-        <?= Html::a('Update', ['update', 'id' => $model->nID_level], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Delete', ['delete', 'id' => $model->nID_level], [
-            'class' => 'btn btn-danger',
-            'data' => [
-                'confirm' => 'Are you sure you want to delete this item?',
-                'method' => 'post',
-            ],
-        ]) ?>
-    </p>
+<div class="modal-body">
 
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'nID_level',
             'vLevel_user',
             'vDeskripsi',
+            'vOtoritastype',
         ],
     ]) ?>
 
+</div>
+
+<div class="modal-footer">
+	<button type="button" class="btn btn-success" data-dismiss="modal">Close</button>
 </div>

@@ -41,7 +41,7 @@ class LeveluserController extends Controller
 		if($dataProvider != null)
 		{
 			$dataProvider = new ActiveDataProvider([
-            'query' => LevelUser::find()->where(['nRow_status'=>'N']),
+                        'query' => LevelUser::find()->where(['nRow_status'=>'N']),
 			]);
 		}
         return $this->render('index', [
@@ -56,6 +56,13 @@ class LeveluserController extends Controller
      */
     public function actionView($id)
     {
+        $model = $this->findModel($id);
+        if(Yii::$app->request->isAjax)
+        {
+                return $this->renderAjax('view', [
+                        'model' => $model
+                ]);
+        }
         return $this->render('view', [
             'model' => $this->findModel($id),
         ]);
@@ -73,8 +80,14 @@ class LeveluserController extends Controller
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
             $model->nRow_status='N';
             $model->save();
-            return $this->redirect(['view', 'id' => $model->nID_level]);
+            return $this->redirect(['index']);
         } else {
+            if(Yii::$app->request->isAjax)
+            {
+                    return $this->renderAjax('create', [
+                            'model' => $model
+                    ]);
+            }
             return $this->render('create', [
                 'model' => $model,
             ]);
@@ -92,8 +105,14 @@ class LeveluserController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->nID_level]);
+            return $this->redirect(['index']);
         } else {
+            if(Yii::$app->request->isAjax)
+            {
+                return $this->renderAjax('update', [
+                        'model' => $model
+                ]);
+            }
             return $this->render('update', [
                 'model' => $model,
             ]);

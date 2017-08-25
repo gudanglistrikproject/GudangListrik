@@ -139,7 +139,6 @@ AppAsset::register($this);
               <ul class="treeview-menu">
                 <li><?= Html::a('<i class="fa fa-circle-o"></i> Kategori Produk', ['/kategori']) ?></li>
                 <li><?= Html::a('<i class="fa fa-circle-o"></i> Sub Kategori Produk', ['/subkategori']) ?></li>
-                <li><?= Html::a('<i class="fa fa-circle-o"></i> Sub Sub Kategori Produk', ['/users']) ?></li>
                 <li><?= Html::a('<i class="fa fa-circle-o"></i> Brand', ['/brand']) ?></li>
                 <li><?= Html::a('<i class="fa fa-circle-o"></i> Jasa Pengiriman', ['/users']) ?></li>
                 <li><?= Html::a('<i class="fa fa-circle-o"></i> Level Member', ['/leveluser']) ?></li>

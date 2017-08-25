@@ -16,24 +16,33 @@ use backend\models\Brand;
     <?php $form = ActiveForm::begin(); ?>
 
     <?= $form->field($model, 'vNama_produk')->textInput() ?>
-	<?=
-        Html::activeDropDownList($model, 'nID_kategori', 
-        ArrayHelper::map(Kategori::find()->all(), 'nID_kategori','vNama_kategori'),['prompt'=>'---Select---'],
-		[
-            'class' => 'form-group'
-        ]);
-			
-    ?>
-
-	<?=
-        Html::activeDropDownList($model, 'nID_subkategori', 
-        ArrayHelper::map(SubKategori::find()->all(), 'nID_subkategori','vNama_subkategori'),['prompt'=>'---Select---']);
-    ?>
-
-	<?= 
-		Html::activeDropDownList($model, 'nID_brand', 
-        ArrayHelper::map(Brand::find()->all(), 'nID_brand','vNama_brand'),['prompt'=>'---Select---']);
-    ?>
+    <div class="form-group">
+        <?=
+            Html::activeLabel($model, 'nID_kategori' ); 
+        ?>
+        <?=
+            Html::activeDropDownList($model, 'nID_kategori', 
+            ArrayHelper::map(Kategori::find()->all(), 'nID_kategori','vNama_kategori'),['prompt'=>'---Select---','class'=>'form-control']);
+        ?>
+    </div>
+    <div class="form-group">
+        <?=
+            Html::activeLabel($model, 'nID_subkategori' ); 
+        ?>
+        <?=
+            Html::activeDropDownList($model, 'nID_subkategori', 
+            ArrayHelper::map(SubKategori::find()->all(), 'nID_subkategori','vNama_subkategori'),['prompt'=>'---Select---','class'=>'form-control test']);
+        ?>
+    </div>
+    <div class="form-group">
+        <?=
+            Html::activeLabel($model, 'nID_brand' ); 
+        ?>
+        <?= 
+            Html::activeDropDownList($model, 'nID_brand', 
+            ArrayHelper::map(Brand::find()->all(), 'nID_brand','vNama_brand'),['prompt'=>'---Select---','class'=>'form-control test']);
+        ?>
+    </div>
 
     <?= $form->field($model, 'vProduk_seo')->textInput() ?>
 
@@ -55,8 +64,9 @@ use backend\models\Brand;
 
     <?= $form->field($model, 'nAktif')->dropDownList([ 'Y' => 'Y', 'N' => 'N', ], ['prompt' => '--Select Action---']) ?>
 
-    <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+    <div class="modal-footer">
+        <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-success']) ?>
+        <button type="button" class="btn btn-success" data-dismiss="modal">Close</button>
     </div>
 
     <?php ActiveForm::end(); ?>

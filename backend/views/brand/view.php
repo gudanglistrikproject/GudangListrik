@@ -18,19 +18,7 @@ $this->params['breadcrumbs'][] = $this->title;
 </div>
 
 <div class="modal-body">
-	<!--
-	<p>
-		<?= Html::a('Update', ['update', 'id' => $model->nID_brand], ['class' => 'btn btn-primary']) ?>
-		<?= Html::a('Delete', ['delete', 'id' => $model->nID_brand], [
-			'class' => 'btn btn-danger',
-			'data' => [
-				'confirm' => 'Are you sure you want to delete this item?',
-				'method' => 'post',
-			],
-		]) ?>
-	</p>
-	-->
-		
+	
 	<?= DetailView::widget([
 		'model' => $model,
 		'attributes' => [
@@ -45,5 +33,5 @@ $this->params['breadcrumbs'][] = $this->title;
 </div>
 
 <div class="modal-footer">
-	<button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+	<button type="button" class="btn btn-success" data-dismiss="modal">Close</button>
 </div>

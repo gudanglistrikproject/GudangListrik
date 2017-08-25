@@ -34,7 +34,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?=
             $form->field($model, 'username')
             ->textInput(['autofocus' => true, 'id' => 'signin-email',
-                'placeholder'=>'username',
+                'placeholder' => 'username',
                 'class' => 'full-width has-padding has-border'])
             ->label('username', ['class' => 'image-replace cd-email'])
     ?>
@@ -42,7 +42,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?=
             $form->field($model, 'password')
             ->passwordInput(['id' => 'signin-password',
-                'placeholder'=>'password',
+                'placeholder' => 'password',
                 'class' => 'full-width has-padding has-border'])
             ->label('Password', ['class' => 'image-replace cd-password'])
     ?>
@@ -63,26 +63,58 @@ $this->params['breadcrumbs'][] = $this->title;
     <!-- <a href="#0" class="cd-close-form">Close</a> -->
 
 </div>
-
+<style>
+    .has-error{
+        border: 2px solid #d76666 !important;
+    }
+</style>
 <script>
-    $(document).ready(function(){
-        $('#login-form').on('submit',function(){
+    $(document).ready(function () {
+        $("#signin-email").bind('focus blur select change click dblclick keypress keydown keyup', function () {
+            $("#signin-email").removeClass('has-error');
+        });
+        $("#signin-password").bind('focus blur select change click dblclick keypress keydown keyup', function () {
+            $("#signin-password").removeClass('has-error');
+        });
+        $('#login-form').on('submit', function () {
             var isLogin = false;
-            $.ajax({
-            type: 'POST',
-            url: "site/loginjson",
-            async:false,
-            data: {username: $("#signin-email").val(),password:$("#signin-password").val()},
-            success: function(data, status){
-                alert(data);
-                toastr.success('We do have the Kapua suite available.', 'Turtle Bay Resort', {timeOut: 5000})
-                if(data === 'Done')
-                {
-                    isLogin = true;
-                }
-                //alert("Data: " + data + "\nStatus: " + status);
+            if ($("#signin-email").val() == '')
+            {
+                toastr.error('username cannot blank', 'Fail', {timeOut: 5000});
+                $("#signin-email").addClass('has-error');
+            } 
+            else if ($("#signin-password").val() == '')
+            {
+                toastr.error('password cannot blank', 'Fail', {timeOut: 5000});
+                $("#signin-password").addClass('has-error');
+            } 
+            else
+            {
+                $.ajax({
+                    type: 'POST',
+                    url: "site/loginjson",
+                    async: false,
+                    data: {username: $("#signin-email").val(), password: $("#signin-password").val()},
+                    success: function (data, status) {
+                        if (data === 'Done')
+                        {
+                            toastr.success('Login Success', 'Success', {timeOut: 5000});
+                            isLogin = true;
+                        } else
+                        {
+                            if(data=='Incorrect username')
+                            {
+                                $("#signin-email").addClass('has-error');
+                            }
+                            else if(data=='Incorrect password')
+                            {
+                                $("#signin-password").addClass('has-error');
+                            }
+                            toastr.error('Login Fail: ' + data, 'Fail', {timeOut: 5000});
+                        }
+                    }
+                });
             }
-            });
             return isLogin;
         });
     });

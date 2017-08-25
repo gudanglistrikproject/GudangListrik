@@ -10,20 +10,14 @@ $this->title = $model->nID;
 $this->params['breadcrumbs'][] = ['label' => 'Mainmenus', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="mainmenu-view">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+<div class="modal-header">
+	<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	<span aria-hidden="true">×</span></button>
+	<h4 class="modal-title"><?= Html::encode($this->title) ?></h4>
+</div>
 
-    <p>
-        <?= Html::a('Update', ['update', 'id' => $model->nID], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Delete', ['delete', 'id' => $model->nID], [
-            'class' => 'btn btn-danger',
-            'data' => [
-                'confirm' => 'Are you sure you want to delete this item?',
-                'method' => 'post',
-            ],
-        ]) ?>
-    </p>
+<div class="modal-body">
 
     <?= DetailView::widget([
         'model' => $model,
@@ -34,4 +28,7 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
     ]) ?>
 
+</div>
+<div class="modal-footer">
+	<button type="button" class="btn btn-success" data-dismiss="modal">Close</button>
 </div>

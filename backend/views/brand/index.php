@@ -66,4 +66,20 @@ $this->params['breadcrumbs'][] = $this->title;
 			]); ?>
 		</div>
 	</div>
+	
+	<?php
+		echo "<div class='row'>"; // open a new row of 4 card
+		foreach ($dataProvider->models as $card) {
+			echo "<div class='col-md-3 col-xs-12'>";
+			echo "<div class='thumbnail'>";
+			echo $card->vBrand_seo;
+			echo "</br>";
+			echo $card->vInisial_brand;
+			echo "</br>";
+			echo $card->vNama_brand;
+			echo "</div></div>";
+			
+		}
+		echo "</div><!-- close row last row-->";
+	?>
 </div>

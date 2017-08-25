@@ -10,30 +10,26 @@ $this->title = $model->nID_admin;
 $this->params['breadcrumbs'][] = ['label' => 'User Admins', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="user-admin-view">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+<div class="modal-header">
+	<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	<span aria-hidden="true">×</span></button>
+	<h4 class="modal-title"><?= Html::encode($this->title) ?></h4>
+</div>
 
-    <p>
-        <?= Html::a('Update', ['update', 'id' => $model->nID_admin], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Delete', ['delete', 'id' => $model->nID_admin], [
-            'class' => 'btn btn-danger',
-            'data' => [
-                'confirm' => 'Are you sure you want to delete this item?',
-                'method' => 'post',
-            ],
-        ]) ?>
-    </p>
+<div class="modal-body">
+			
+	<?= DetailView::widget([
+		'model' => $model,
+		'attributes' => [
+			'vUsername',
+                        'vPassword',
+                        'vNama',
+                        'vOtoritas_admin',
+		],
+	]) ?>
+</div>
 
-    <?= DetailView::widget([
-        'model' => $model,
-        'attributes' => [
-            'nID_admin',
-            'vUsername',
-            'vPassword',
-            'vNama',
-            'vOtoritas_admin',
-        ],
-    ]) ?>
-
+<div class="modal-footer">
+	<button type="button" class="btn btn-success" data-dismiss="modal">Close</button>
 </div>

@@ -12,19 +12,24 @@ use backend\models\Kategori;
 <div class="sub-kategori-form">
 
     <?php $form = ActiveForm::begin(); ?>
-
-     <?=
-        Html::activeDropDownList($model, 'nID_kategori', 
-        ArrayHelper::map(Kategori::find()->all(), 'nID_kategori','vNama_kategori'),['prompt'=>'---Select---']);
-    ?>
-
+    <div class="form-group">
+        <?=
+            Html::activeLabel($model, 'nID_kategori' ); 
+        ?>
+        <?=
+            Html::activeDropDownList($model, 'nID_kategori', 
+            ArrayHelper::map(Kategori::find()->all(), 'nID_kategori','vNama_kategori'),['prompt'=>'---Select---','class'=>'form-control']);
+        ?>
+        <div class="help-block"></div>
+    </div>
     <?= $form->field($model, 'vNama_subkategori')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'sub_kategori_seo')->textInput(['maxlength' => true]) ?>
 
 
-    <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+    <div class="modal-footer">
+        <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-success']) ?>
+        <button type="button" class="btn btn-success" data-dismiss="modal">Close</button>
     </div>
 
     <?php ActiveForm::end(); ?>

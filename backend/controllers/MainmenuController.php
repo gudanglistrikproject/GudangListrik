@@ -42,7 +42,7 @@ class MainmenuController extends Controller
 		if($dataProvider != null)
 		{
 			$dataProvider = new ActiveDataProvider([
-            'query' => Mainmenu::find()->where(['nRowStatus'=>'N']),
+                        'query' => Mainmenu::find()->where(['nRowStatus'=>'N']),
 			]);
 		}
 
@@ -58,6 +58,13 @@ class MainmenuController extends Controller
      */
     public function actionView($id)
     {
+        $model = $this->findModel($id);
+        if(Yii::$app->request->isAjax)
+        {
+                return $this->renderAjax('view', [
+                        'model' => $model
+                ]);
+        }
         return $this->render('view', [
             'model' => $this->findModel($id),
         ]);
@@ -75,8 +82,14 @@ class MainmenuController extends Controller
         if ($model->load(Yii::$app->request->post())) {
 			$model->nRowStatus='N';
             $model->save();
-            return $this->redirect(['view', 'id' => $model->nID]);
+            return $this->redirect(['index']);
         } else {
+            if(Yii::$app->request->isAjax)
+            {
+                    return $this->renderAjax('create', [
+                            'model' => $model
+                    ]);
+            }
             return $this->render('create', [
                 'model' => $model,
             ]);
@@ -94,8 +107,14 @@ class MainmenuController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->nID]);
+            return $this->redirect(['index']);
         } else {
+            if(Yii::$app->request->isAjax)
+            {
+                    return $this->renderAjax('update', [
+                            'model' => $model
+                    ]);
+            }
             return $this->render('update', [
                 'model' => $model,
             ]);

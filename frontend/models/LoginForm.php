@@ -15,6 +15,7 @@ class LoginForm extends Model {
     public $password;
     public $rememberMe = true;
     private $_user;
+    private $ret;
 
     /**
      * @inheritdoc
@@ -55,6 +56,7 @@ class LoginForm extends Model {
                 }
             }
         }
+        $this->ret=$err;
         return $err;
     }
 
@@ -65,6 +67,7 @@ class LoginForm extends Model {
      */
     public function login() {
         $result = $this->validate();
+        $result = $this->ret;
         if ($result=='done') {
             Yii::$app->user->login($this->getPassword(), $this->rememberMe ? 3600 * 24 * 30 : 0);
             return $result;
@@ -80,8 +83,7 @@ class LoginForm extends Model {
      */
     protected function getUser() {
         $model = UserAdmin::find()
-                    ->where(['vUsername' => $this->username]);
-
+                    ->where(['vUsername' => $this->username])->exists();
         return $model;
     }
 
@@ -90,7 +92,7 @@ class LoginForm extends Model {
             //$this->_user = User::findByUsername($this->username);
             $this->_user = UserAdmin::find()
                     ->where(['vUsername' => $this->username])
-                    ->where(['vPassword' => $this->password])
+                    ->andWhere(['vPassword' => $this->password])
                     ->one();
         }
 

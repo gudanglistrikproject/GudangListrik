@@ -51,6 +51,13 @@ class UseradminController extends Controller
      */
     public function actionView($id)
     {
+        $model = $this->findModel($id);
+        if(Yii::$app->request->isAjax)
+        {
+            return $this->renderAjax('view', [
+                    'model' => $model
+            ]);
+        }
         return $this->render('view', [
             'model' => $this->findModel($id),
         ]);
@@ -65,9 +72,17 @@ class UseradminController extends Controller
     {
         $model = new UserAdmin();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->nID_admin]);
+        if ($model->load(Yii::$app->request->post())) {
+            $model->nRow_status='N';
+            $model->save();
+            return $this->redirect(['index']);
         } else {
+            if(Yii::$app->request->isAjax)
+            {
+                    return $this->renderAjax('create', [
+                            'model' => $model
+                    ]);
+            }
             return $this->render('create', [
                 'model' => $model,
             ]);
@@ -85,8 +100,14 @@ class UseradminController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->nID_admin]);
+            return $this->redirect(['index']);
         } else {
+                if(Yii::$app->request->isAjax)
+                {
+                        return $this->renderAjax('update', [
+                                'model' => $model
+                        ]);
+                }
             return $this->render('update', [
                 'model' => $model,
             ]);
@@ -101,7 +122,9 @@ class UseradminController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+        $model = $this->findModel($id);
+        $model->nRow_status='Y';
+        $model->save();
 
         return $this->redirect(['index']);
     }

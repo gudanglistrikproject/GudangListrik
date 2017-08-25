@@ -10,29 +10,25 @@ $this->title = $model->nID;
 $this->params['breadcrumbs'][] = ['label' => 'Slide Shows', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="slide-show-view">
+<div class="modal-header">
+	<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	<span aria-hidden="true">×</span></button>
+	<h4 class="modal-title"><?= Html::encode($this->title) ?></h4>
+</div>
 
-    <h1><?= Html::encode($this->title) ?></h1>
-
-    <p>
-        <?= Html::a('Update', ['update', 'id' => $model->nID], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Delete', ['delete', 'id' => $model->nID], [
-            'class' => 'btn btn-danger',
-            'data' => [
-                'confirm' => 'Are you sure you want to delete this item?',
-                'method' => 'post',
-            ],
-        ]) ?>
-    </p>
+<div class="modal-body">
 
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
+            'vJudul',
+            'vIsi',
             'vPath_image',
-            'vNama_image',
-            'vType_image',
-            'vStatus',
+            'vLink',
         ],
     ]) ?>
 
+</div>
+<div class="modal-footer">
+	<button type="button" class="btn btn-success" data-dismiss="modal">Close</button>
 </div>

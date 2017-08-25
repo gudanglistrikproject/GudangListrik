@@ -38,12 +38,12 @@ class BrandController extends Controller
         $dataProvider = new ActiveDataProvider([
             'query' => Brand::find(),
         ]);
-		if($dataProvider != null)
-		{
-			$dataProvider = new ActiveDataProvider([
-                        'query' => Brand::find()->where(['vRowStatus'=>'N']),
-			]);
-		}
+        if($dataProvider != null)
+        {
+            $dataProvider = new ActiveDataProvider([
+            'query' => Brand::find()->where(['vRowStatus'=>'N']),
+            ]);
+        }
         return $this->render('index', [
             'dataProvider' => $dataProvider,
         ]);
@@ -56,13 +56,13 @@ class BrandController extends Controller
      */
     public function actionView($id)
     {
-		$model = $this->findModel($id);
-		if(Yii::$app->request->isAjax)
-		{
-			return $this->renderAjax('view', [
-				'model' => $model
-			]);
-		}
+        $model = $this->findModel($id);
+        if(Yii::$app->request->isAjax)
+        {
+                return $this->renderAjax('view', [
+                        'model' => $model
+                ]);
+        }
 
         return $this->render('view', [
             'model' => $this->findModel($id),
@@ -96,7 +96,7 @@ class BrandController extends Controller
     }
     
     public function actionBrandcheckjson() {
-        $status = 'Fail';
+        $status = 'No';
         if (Yii::$app->request->post()) {
             $data = Yii::$app->request->post();
             $vNama_brand = $data['vNama_brand'];
@@ -105,11 +105,16 @@ class BrandController extends Controller
             $dataProvider = new ActiveDataProvider([
                 'query' => Brand::find()->where(['vRowStatus'=>'N']),
             ]);
-            
-            $status = 's'; //$model->login();
+            if($dataProvider != null)
+            {
+                $status = 'Yes';
+            }
+            else
+            {
+                $status = 'No';
+            }
         }
-        
-        $this->renderPartial('_ajaxContent', array('message'=>$status), false, true);
+        return $status;
     }
 
     /**
@@ -125,12 +130,12 @@ class BrandController extends Controller
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['index']);
         } else {
-                if(Yii::$app->request->isAjax)
-                {
-                        return $this->renderAjax('update', [
-                                'model' => $model
-                        ]);
-                }
+            if(Yii::$app->request->isAjax)
+            {
+                return $this->renderAjax('update', [
+                        'model' => $model
+                ]);
+            }
             return $this->render('update', [
                 'model' => $model,
             ]);

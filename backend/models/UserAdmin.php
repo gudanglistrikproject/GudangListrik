@@ -43,12 +43,12 @@ class UserAdmin extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'nID_admin' => 'N Id Admin',
-            'vUsername' => 'V Username',
-            'vPassword' => 'V Password',
-            'vNama' => 'V Nama',
-            'vOtoritas_admin' => 'V Otoritas Admin',
-            'nRow_status' => 'N Row Status',
+            'nID_admin' => 'Id Admin',
+            'vUsername' => 'Username',
+            'vPassword' => 'Password',
+            'vNama' => 'Nama',
+            'vOtoritas_admin' => 'Otoritas Admin',
+            'nRow_status' => 'Row Status',
         ];
     }
 }

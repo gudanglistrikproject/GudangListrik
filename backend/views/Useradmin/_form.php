@@ -3,7 +3,7 @@
 use yii\helpers\Html;
 use yii\helpers\ArrayHelper;
 use yii\widgets\ActiveForm;
-use backend\models\OtoritasAdmin;
+use backend\models\LevelUser;
 
 /* @var $this yii\web\View */
 /* @var $model backend\models\UserAdmin */
@@ -14,19 +14,27 @@ use backend\models\OtoritasAdmin;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'vUsername')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'vUsername')->textInput(['maxlength' => true,'id'=>'vUsername']) ?>
 
-    <?= $form->field($model, 'vPassword')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'vPassword')->textInput(['maxlength' => true,'id'=>'vUsername']) ?>
 
-    <?= $form->field($model, 'vNama')->textInput(['maxlength' => true]) ?>
-
-	<?=
-        Html::activeDropDownList($model, 'vOtoritas_admin', 
-        ArrayHelper::map(OtoritasAdmin::find()->all(), 'nID_otoritas_admin','vOtoritas'),['prompt'=>'---Select---']);
-    ?>
-	
+    <?= $form->field($model, 'vNama')->textInput(['maxlength' => true,'id'=>'vNama']) ?>
+    
     <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+        <?=
+        Html::activeLabel($model, 'vOtoritas_admin' ); 
+        ?>
+        <?=
+            Html::activeDropDownList($model, 'vOtoritas_admin',
+            ArrayHelper::map(LevelUser::find()->all(), 'nID_level','vLevel_user'),['prompt'=>'---Select---','class'=>'form-control userAdmin']);
+        ?>
+        <div class="help-block"></div>
+    </div>
+    
+	
+    <div class="modal-footer">
+        <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-success']) ?>
+        <button type="button" class="btn btn-success" data-dismiss="modal">Close</button>
     </div>
 
     <?php ActiveForm::end(); ?>

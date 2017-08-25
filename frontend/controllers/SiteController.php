@@ -83,6 +83,7 @@ class SiteController extends Controller
     public function actionLogin()
     {
         $model = new LoginForm();
+        
         if (!Yii::$app->user->isGuest) {
             return $this->redirect('/gudanglistrik/admin');
         }
@@ -105,7 +106,6 @@ class SiteController extends Controller
             $model->username = $username;
             $model->password = $password;
             $status = $model->login();
-            $status = 'Done';
         }
         return $status;
     }
